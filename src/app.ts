@@ -4,9 +4,10 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { common } from './config';
+import userRouter from './resources/user/user.router';
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(helmet());
 app.use(morgan('combined'));
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(cookieParser());
 app.use('/health', (_, res: Response) => {
   res.sendStatus(200);
 });
+app.use('/user', userRouter);
 
 const { port } = common;
 
