@@ -23,10 +23,9 @@ export const login = async (req: Request, res: Response) => {
       expiresIn: '1d',
     });
 
-    return res.status(200).send({
-      message: 'login success',
-      token,
-    });
+    res.cookie('auth-token', token);
+
+    return res.sendStatus(200);
   } catch (e) {
     return res.sendStatus(500);
   }
