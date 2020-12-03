@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+import { common } from './config';
 
 const app = express();
 app.use(cors());
@@ -16,7 +17,7 @@ app.use('/health', (_, res: Response) => {
   res.sendStatus(200);
 });
 
-const port = (process.env.PORT && parseInt(process.env.PORT, 10)) || 8080;
+const { port } = common;
 
 export const start = () => {
   app.listen(port, () => {
